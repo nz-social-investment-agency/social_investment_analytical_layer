@@ -35,8 +35,8 @@ HISTORY:
 
 /* Change the schema to your own schema*/
 /* Change the path to match the location where you put the sial scripts */
-%let targetschema=DL-MA20XX-XX;
-%let sial_code_path = \\wprdfs08\<project_name>\social_investment_analytical_layer;
+%let targetschema=DL-MAA20XX-XX;
+%let sial_code_path = \\<file_server_path>\<project_name>\social_investment_analytical_layer;
 
 
 
