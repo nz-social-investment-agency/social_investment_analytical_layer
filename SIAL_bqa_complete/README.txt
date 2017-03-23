@@ -1,6 +1,6 @@
 Readme file for folder: SIAL_bqa_complete
 
-All scripts in this folder have been reviewed by the corresponding agencey.
+All scripts in this folder have been reviewed by the corresponding agency.
 
 Where possible the scripts are written in SQL and create views to conserve space. 
 Users should take care using tables during a refresh persiod as views will use the latest data.
