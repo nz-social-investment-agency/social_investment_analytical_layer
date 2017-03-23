@@ -15,7 +15,7 @@ Expect warnings around the quoted string being processed becoming more than 262 
 2. Email the zipped file to access2microdata@stats.govt.nz and ask them to move it into your project folder
 3. Unzip the files into your project
 4. Paste the social_investment_analytical_layer-master folder into the top level of your project folder and rename it social_investment_analytical_layer
-5. Open  main_sial.sas in SAS EG
+5. Open  main_sial.sas (located in the SIAL_dependencies folder) in SAS EG
 6. At the top of the main_sial.sas script there are two macro variables called `targetschema` and `sial_code_path`
 7. Change the `targetschema` to the location you wish to write your files to e.g. the SIU project schema is DL-MAA2016-15
 8. Change the `sial_code_path` to the location where you stored the scripts on the network E.g. for the SIU our location is \\wprdfs08\MAA2016-15 Supporting the Social Investment Unit\social_investment_analytical_layer
