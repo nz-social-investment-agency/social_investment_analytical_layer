@@ -18,7 +18,7 @@ Expect warnings around the quoted string being processed becoming more than 262 
 5. Open  main_sial.sas (located in the SIAL_dependencies folder) in SAS EG
 6. At the top of the main_sial.sas script there are two macro variables called `targetschema` and `sial_code_path`
 7. Change the `targetschema` to the location you wish to write your files to e.g. the SIU project schema is DL-MAA2016-15
-8. Change the `sial_code_path` to the location where you stored the scripts on the network E.g. for the SIU our location is \\wprdfs08\MAA2016-15 Supporting the Social Investment Unit\social_investment_analytical_layer
+8. Change the `sial_code_path` to the location where you stored the scripts on the network E.g. for the SIU our location is \\...\MAA2016-15 Supporting the Social Investment Unit\social_investment_analytical_layer
 
 **Note that each time you run main_sial.sas it will uninstall all the SIAL tables you currently have before creating the SIAL tables**
 
