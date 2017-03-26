@@ -13,6 +13,7 @@ Expect warnings around the quoted string being processed becoming more than 262 
 **SIAL_bqa_complete:** this folder contains scripts that have been reviewed by the corresponding agencies.  
 **SIAL_bqa_incomplete:** this folder contains scripts that are currently being reviewed by the corresponding agencies.  
 **SIAL_log:** This folder is used to store the output logs that SAS generates. Since SAS does not have easy to use error handling the logs are written to file and scanned for errors.
+**SIAL_docs:** This folder contains the data dictionary for the SIAL.
 
 # Installation
 1. Download the zip file containing the SIAL scripts from github.
