@@ -56,8 +56,30 @@ create  table #directorytree(
 	subdirectory nvarchar(512),
 	depth int,
 	isfile bit);
-insert #directorytree (subdirectory, depth, isfile)
-exec master.sys.xp_dirtree @sourceFolder, 1, 1;
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_complete\ACC_injury_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_complete\CYF_abuse_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_complete\CYF_client_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_complete\MOJ_courtcase_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_complete\MSD_T2_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_complete\MSD_T3_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\COR_sentence_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\IRD_income_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MIX_mortality_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MIX_selfharm_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MOE_intervention_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MOH_B4School_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MOH_cancer_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MOH_chronic_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MOH_gms_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MOH_labtest_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MOH_nir_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MOH_nnpac_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MOH_pfhd_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MOH_pharm_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MOH_primhd_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\POL_offender_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\POL_victim_events.sql', 1,1);
+/*insert #directorytree (subdirectory, depth, isfile) exec master.sys.xp_dirtree @sourceFolder, 1, 1;*/
 
 /* Create a temp table to hold the result log of running the scripts  */
 if object_id('tempdb..#resultsummary') is not null drop table #resultsummary;
@@ -81,7 +103,7 @@ while @@FETCH_STATUS = 0
 	begin
 
 	/* Read text from file into variable */
-	select @sqlscript = 'select @varbinaryField = BulkColumn from openrowset(bulk''' + @sourceFolder + @sourceSqlfilename + ''', single_blob) x'
+	select @sqlscript = 'select @varbinaryField = BulkColumn from openrowset(bulk''' + @sourceFolder + @sourceSqlfilename + ''', single_blob) x';
 	execute sp_ExecuteSQL @sqlscript, N'@varbinaryField varbinary(max) output ', @varbinaryField output;
 
 	/* Replace the schema identifier in the script with the target schema into which the SIAL components need to be created */ 
@@ -112,7 +134,7 @@ end;
 close scriptcursor;
 deallocate scriptcursor;
 
-set @outputquery = 'if object_id(''sialexecresults'') is null create table ' + @targetschemaname + '.sialexecresults(
+set @outputquery = 'if object_id(''' + @targetschemaname + '.sialexecresults'') is null create table ' + @targetschemaname + '.sialexecresults(
 	logdate datetime,
 	sqlfilename nvarchar(100),
 	resultcode nvarchar(100),

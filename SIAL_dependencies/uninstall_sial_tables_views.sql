@@ -23,8 +23,9 @@
 
 /* Drop the SIAL meta-tables and procedures*/
 if object_id('{schemaname}.sialexecresults') is not null  drop table {schemaname}.sialexecresults;
-if object_id('{schemaname}.sp_createSIALViews') is not null  drop procedure {schemaname}.sp_createSIALViews;
-if object_id('{schemaname}.sp_loadPricingtables') is not null  drop procedure {schemaname}.sp_loadPricingtables;
+if object_id('sp_createSIALViews') is not null  drop procedure sp_createSIALViews;
+if object_id('sp_loadPricingtables') is not null  drop procedure sp_loadPricingtables;
+if object_id('sialexecresults') is not null  drop table sialexecresults;
 
 /* Drop the pricing support tables*/
 if object_id('{schemaname}.moe_school_decile_pricing') is not null  drop table {schemaname}.moe_school_decile_pricing;
@@ -65,3 +66,4 @@ if object_id('{schemaname}.SIAL_MSD_T3_events') is not null  drop view {schemana
 /* Drop the SIAL tables*/
 if object_id('{schemaname}.SIAL_MOE_school_events') is not null  drop table {schemaname}.SIAL_MOE_school_events;
 if object_id('{schemaname}.SIAL_MOE_tertiary_events') is not null  drop table {schemaname}.SIAL_MOE_tertiary_events;
+if object_id('{schemaname}.SIAL_MSD_T1_events') is not null  drop table {schemaname}.SIAL_MSD_T1_events;

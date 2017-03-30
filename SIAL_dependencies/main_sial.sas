@@ -35,8 +35,8 @@ HISTORY:
 
 /* Change the schema to your own schema*/
 /* Change the path to match the location where you put the sial scripts */
-%let targetschema=DL-MAA20XX-XX;
-%let sial_code_path = \\<file_server_path>\<project_name>\social_investment_analytical_layer;
+%let targetschema=DL-MAA2016-15;
+%let sial_code_path = \\wprdfs08\MAA2016-15 Supporting the Social Investment Unit\Vinay\social_investment_analytical_layer\;
 
 
 
@@ -53,6 +53,7 @@ libname sand ODBC dsn= idi_sandpit_srvprd schema="&targetschema." bulkload=yes;
 %let logfolder = &sial_code_path.\SIAL_logs\;
 %let bqacfolder = &sial_code_path.\SIAL_bqa_complete\;
 %let bqaifolder = &sial_code_path.\SIAL_bqa_incomplete\;
+%let sqlfolder = &sial_code_path.\;
 
 /* Read in the remaining libraries needed for the SIAL tables that run in SAS */
 %include "&dependfolder.\libnames.sas";
@@ -104,10 +105,11 @@ proc sql;
 	execute( exec [sp_loadPricingtables] @targetschemaname=&targetschema, @sourceFolder= %tslit(&dependfolder.) ) by odbc;	
 
 	/* Run all the SIAL views in the bqac folder*/	
-	execute( exec [sp_createSIALViews] @targetschemaname=&targetschema, @sourceFolder= %tslit(&bqacfolder.) ) by odbc;
+	/*execute( exec [sp_createSIALViews] @targetschemaname=&targetschema, @sourceFolder= %tslit(&sqlfolder.) ) by odbc;*/
 
 	/* Run all the SIAL views in the bqai folder*/	
-	execute( exec [sp_createSIALViews] @targetschemaname=&targetschema, @sourceFolder= %tslit(&bqaifolder.) ) by odbc;	
+	/*execute( exec [sp_createSIALViews] @targetschemaname=&targetschema, @sourceFolder= %tslit(&bqaifolder.) ) by odbc;	*/
+	execute( exec [sp_createSIALViews] @targetschemaname=&targetschema, @sourceFolder= %tslit(&sqlfolder.) ) by odbc;
 	
 	/* Drop the SIAL stored procedures from SQL*/
 	execute (drop procedure [sp_loadPricingtables]) by odbc;
@@ -117,43 +119,43 @@ proc sql;
 	disconnect from odbc;
 quit;
 
-proc sql;
-	connect to odbc(dsn=idi_sandpit_srvprd);
-	create table work.sialexecresults as select * from connection to odbc(select * from sialexecresults);
-	disconnect from odbc;
-quit;
+/*proc sql;*/
+/*	connect to odbc(dsn=idi_sandpit_srvprd);*/
+/*	create table work.sialexecresults as select * from connection to odbc(select * from sialexecresults);*/
+/*	disconnect from odbc;*/
+/*quit;*/
 
 
 
-/* MOE primary and secondary enrolments */
-filename log1 %tslit(&logfolder.MOE_school_events_saslog_&sysdate.&time_hh.&time_mm.&time_ss..txt);
-proc printto log=log1 new;run;
-%include "&bqaifolder.MOE_school_events.sas";
-proc printto;run;
-%getErrors(logfile=log1);
-proc sql;
-	insert into work.sialexecresults select today(), 'MOE_school_events.sas', 'NA', logline from errors;
-quit;
-
-
-/* MOE tertiary events  */
-filename log2 %tslit(&logfolder.MOE_tertiary_events_saslog_&sysdate.&time_hh.&time_mm.&time_ss..txt);
-proc printto log=log2 new;run;
-%include "&bqaifolder.MOE_tertiary_events.sas";
-proc printto;run;
-%getErrors(logfile=log2);
-proc sql;
-	insert into work.sialexecresults select today(), 'MOE_tertiary_events.sas', 'NA', logline from errors;
-quit;
-
-
-/* MSD tier 1 main benefits */
-filename log3 %tslit(&logfolder.MSD_T1_events_saslog_&sysdate.&time_hh.&time_mm.&time_ss..txt);
-proc printto log=log3 new;run;
-
-%include "&bqacfolder.MSD_T1_events.sas";
-%getErrors(logfile=log3);
-proc printto;run;
-proc sql;
-	insert into work.sialexecresults select today(), 'MSD_T1_events.sas', 'NA', logline from errors;
-quit;
+/*/* MOE primary and secondary enrolments */*/
+/*filename log1 %tslit(&logfolder.MOE_school_events_saslog_&sysdate.&time_hh.&time_mm.&time_ss..txt);*/
+/*proc printto log=log1 new;run;*/
+/*%include "&bqaifolder.MOE_school_events.sas";*/
+/*proc printto;run;*/
+/*%getErrors(logfile=log1);*/
+/*proc sql;*/
+/*	insert into work.sialexecresults select today(), 'MOE_school_events.sas', 'NA', logline from errors;*/
+/*quit;*/
+/**/
+/**/
+/*/* MOE tertiary events  */*/
+/*filename log2 %tslit(&logfolder.MOE_tertiary_events_saslog_&sysdate.&time_hh.&time_mm.&time_ss..txt);*/
+/*proc printto log=log2 new;run;*/
+/*%include "&bqaifolder.MOE_tertiary_events.sas";*/
+/*proc printto;run;*/
+/*%getErrors(logfile=log2);*/
+/*proc sql;*/
+/*	insert into work.sialexecresults select today(), 'MOE_tertiary_events.sas', 'NA', logline from errors;*/
+/*quit;*/
+/**/
+/**/
+/*/* MSD tier 1 main benefits */*/
+/*filename log3 %tslit(&logfolder.MSD_T1_events_saslog_&sysdate.&time_hh.&time_mm.&time_ss..txt);*/
+/*proc printto log=log3 new;run;*/
+/**/
+/*%include "&bqacfolder.MSD_T1_events.sas";*/
+/*%getErrors(logfile=log3);*/
+/*proc printto;run;*/
+/*proc sql;*/
+/*	insert into work.sialexecresults select today(), 'MSD_T1_events.sas', 'NA', logline from errors;*/
+/*quit;*/
