@@ -1,4 +1,4 @@
-# social_investment_analytical_layer
+# social_investment_analytical_layer v1.0
 Standardised tables for doing cross agency work in the IDI
 
 # Overview
