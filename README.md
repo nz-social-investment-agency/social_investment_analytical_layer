@@ -27,6 +27,47 @@ Expect warnings around the quoted string being processed becoming more than 262 
 
 **Note that each time you run main_sial.sas it will uninstall all the SIAL tables you currently have before creating the SIAL tables**
 
+# Expected output
+This will depend on what schemas you have access to. The complete list of tables/views are below
+
+**Views in IDI_Sandpit.<targetschema>**
+SIAL_CYF_abuse_events
+SIAL_CYF_client_events
+SIAL_MOJ_courtcase_events
+SIAL_COR_sentence_events
+SIAL_MSD_T2_events
+SIAL_MSD_T3_events
+SIAL_POL_victim_events
+SAIL_POL_offender_events
+SIAL_ACC_injury_events
+SIAL_MOE_intervention_events
+SIAL_MOE_tertiary_events
+SIAL_MOE_itl_events
+SIAL_MOE_ece_events
+SIAL_MOH_gms_events
+SIAL_MOH_labtest_events
+SIAL_MOH_cancer_events
+SIAL_MOH_chronic_events
+SIAL_MOH_B4School_events
+SIAL_MOH_primhd_events
+SIAL_MOH_pharm_events
+SIAL_MOH_pfhd_events
+SIAL_MOH_nnpac_events
+SIAL_MOH_nir_events
+SIAL_IRD_income_events
+SIAL_MIX_selfharm_events
+SIAL_MIX_mortality_events
+*coming shortly*
+SIAL_HNZ_reg_events
+SIAL_MOE_ece_events
+SIAL_MOE_itl_events
+
+
+**Tables in IDI_Sandpit.<targetschema>**
+SIAL_MSD_T1_events
+SIAL_MOE_school_events
+
+
 # Getting Help
 More information to come.
 
