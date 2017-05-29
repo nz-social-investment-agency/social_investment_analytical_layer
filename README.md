@@ -29,62 +29,62 @@ For example, a hospitalisation spell for an individual in SIAL event terms will 
 9. Run the main_sial.sas script.
 
 The scripts runs in the following fashion- 
-* First, it creates all the necessary variables required for execution based on the user's input.
-* The script then reads in a few SQL scripts from files and parses these.
-* It then uninstalls all SIAL components that are already available in the target schema specified by the user.
-* It installs 2 SQL procedures required for running the SIAL views. This is followed by creation of all SQL Views available in the "sial_bqa_complete" folder, and then the ones in "sial_bqa_incomplete" folder.
-* Tt deletes the stored procedures from the database as these are not required any more.
-* The SIAL tables are then created one by one.
+*First, it creates all the necessary variables required for execution based on the user's input.
+*The script then reads in a few SQL scripts from files and parses these.
+*It then uninstalls all SIAL components that are already available in the target schema specified by the user.
+*It installs 2 SQL procedures required for running the SIAL views. This is followed by creation of all SQL Views available in the "sial_bqa_complete" folder, and then the ones in "sial_bqa_incomplete" folder.
+*Tt deletes the stored procedures from the database as these are not required any more.
+*The SIAL tables are then created one by one.
 
-** Note that each time you run main_sial.sas it will uninstall all the SIAL tables you currently have before creating the SIAL tables. Expect warnings while running the code, especially around quoted strings being processed becoming more than 262 characters long. This is because the pricing table queries are read in as strings. It does not have an impact on the pricing tables being created.
+**Note that each time you run main_sial.sas it will uninstall all the SIAL tables you currently have before creating the SIAL tables. Expect warnings while running the code, especially around quoted strings being processed becoming more than 262 characters long. This is because the pricing table queries are read in as strings. It does not have an impact on the pricing tables being created.
 
 Once the script finishes running, the WORK.sialexecresults table will give you the errors for each SIAL component from the execution if there are any.
 
 ## Output:
 The following tables and views will be created in the target schema that you specified under IDI_Sandpit:
-** SIAL Views (can be found in SQL Management Studio under IDI_Sandpit -> <target schema> -> Views):
-	* SIAL_ACC_injury_events
-	* SIAL_COR_sentence_events
-	* SIAL_CYF_abuse_events
-	* SIAL_CYF_client_events
-	* SIAL_HNZ_register_events
-	* SIAL_IRD_income_events
-	* SIAL_MIX_mortality_events
-	* SIAL_MIX_selfharm_events
-	* SIAL_MOE_ece_events
-	* SIAL_MOE_intervention_events
-	* SIAL_MOE_itl_events
-	* SIAL_MOE_tertiary_events
-	* SIAL_MOH_B4School_events
-	* SIAL_MOH_cancer_events
-	* SIAL_MOH_chronic_events
-	* SIAL_MOH_gms_events
-	* SIAL_MOH_labtest_events
-	* SIAL_MOH_nir_events
-	* SIAL_MOH_nnpac_events
-	* SIAL_MOH_pfhd_events
-	* SIAL_MOH_pharm_events
-	* SIAL_MOH_primhd_events
-	* SIAL_MOJ_courtcase_events	
-	* SIAL_MSD_T2_events
-	* SIAL_MSD_T3_events
-	* SIAL_POL_offender_events
-	* SIAL_POL_victim_events
+**SIAL Views (can be found in SQL Management Studio under IDI_Sandpit -> <target schema> -> Views):
+	*SIAL_ACC_injury_events
+	*SIAL_COR_sentence_events
+	*SIAL_CYF_abuse_events
+	*SIAL_CYF_client_events
+	*SIAL_HNZ_register_events
+	*SIAL_IRD_income_events
+	*SIAL_MIX_mortality_events
+	*SIAL_MIX_selfharm_events
+	*SIAL_MOE_ece_events
+	*SIAL_MOE_intervention_events
+	*SIAL_MOE_itl_events
+	*SIAL_MOE_tertiary_events
+	*SIAL_MOH_B4School_events
+	*SIAL_MOH_cancer_events
+	*SIAL_MOH_chronic_events
+	*SIAL_MOH_gms_events
+	*SIAL_MOH_labtest_events
+	*SIAL_MOH_nir_events
+	*SIAL_MOH_nnpac_events
+	*SIAL_MOH_pfhd_events
+	*SIAL_MOH_pharm_events
+	*SIAL_MOH_primhd_events
+	*SIAL_MOJ_courtcase_events	
+	*SIAL_MSD_T2_events
+	*SIAL_MSD_T3_events
+	*SIAL_POL_offender_events
+	*SIAL_POL_victim_events
 
 **SIAL tables (can be found in SQL Management Studio under IDI_Sandpit -> <target schema> -> Tables):
-	* SIAL_MSD_T1_events
-	* SIAL_MOE_school_events
+	*SIAL_MSD_T1_events
+	*SIAL_MOE_school_events
 
 **SIAL Supporting tables(can be found in SQL Management Studio under IDI_Sandpit -> <target schema> -> Tables):
-	* inflation_index
-	* moe_school_decile_pricing
-	* moe_ter_fundingrates
-	* moh_b4sc_pricing
-	* moh_primhd_pu_pricing
-	* moh_pu_pricing
-	* moj_offence_to_category_map
-	* moj_offense_cat_pricing
-	* cor_mmc_pricing
+	*inflation_index
+	*moe_school_decile_pricing
+	*moe_ter_fundingrates
+	*moh_b4sc_pricing
+	*moh_primhd_pu_pricing
+	*moh_pu_pricing
+	*moj_offence_to_category_map
+	*moj_offense_cat_pricing
+	*cor_mmc_pricing
 
 
 ## Uninstallation:
