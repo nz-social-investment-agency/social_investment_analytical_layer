@@ -44,7 +44,7 @@ Once the script finishes running, the WORK.sialexecresults table will give you t
 ## Output:
 The following tables and views will be created in the target schema that you specified under IDI_Sandpit-
 
-SIAL Views (can be found in SQL Management Studio under IDI_Sandpit -> <target schema> -> Views)-
+SIAL Views (can be found in SQL Management Studio under IDI_Sandpit -> target schema -> Views)-
 * SIAL_ACC_injury_events
 * SIAL_COR_sentence_events
 * SIAL_CYF_abuse_events
@@ -73,11 +73,11 @@ SIAL Views (can be found in SQL Management Studio under IDI_Sandpit -> <target s
 * SIAL_POL_offender_events
 * SIAL_POL_victim_events
 
-SIAL tables (can be found in SQL Management Studio under IDI_Sandpit -> <target schema> -> Tables)-
+SIAL tables (can be found in SQL Management Studio under IDI_Sandpit -> target schema -> Tables)-
 * SIAL_MSD_T1_events
 * SIAL_MOE_school_events
 
-SIAL Supporting tables(can be found in SQL Management Studio under IDI_Sandpit -> <target schema> -> Tables)-
+SIAL Supporting tables(can be found in SQL Management Studio under IDI_Sandpit -> target schema -> Tables)-
 * inflation_index
 * moe_school_decile_pricing
 * moe_ter_fundingrates
