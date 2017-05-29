@@ -28,6 +28,7 @@
 ***************************************************/
 create procedure sp_createSIALViews
 /* User-defined variables */
+@sourcedbname nvarchar(100), /*= IDI_Clean */
 @targetschemaname nvarchar(100), /*= '[DL-MAA2016-15]'*/
 @sourceFolder nvarchar(250) /*= '\\wprdfs08\MAA2016-15 Supporting the Social Investment Unit\Vinay\scripts\sql\'*/
 as 
@@ -56,7 +57,7 @@ create  table #directorytree(
 	subdirectory nvarchar(512),
 	depth int,
 	isfile bit);
-insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_complete\ACC_injury_events.sql', 1,1);
+/*insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_complete\ACC_injury_events.sql', 1,1);
 insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_complete\CYF_abuse_events.sql', 1,1);
 insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_complete\CYF_client_events.sql', 1,1);
 insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_complete\MOJ_courtcase_events.sql', 1,1);
@@ -79,7 +80,11 @@ insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\
 insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MOH_primhd_events.sql', 1,1);
 insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\POL_offender_events.sql', 1,1);
 insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\POL_victim_events.sql', 1,1);
-/*insert #directorytree (subdirectory, depth, isfile) exec master.sys.xp_dirtree @sourceFolder, 1, 1;*/
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MOE_ECE_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MOE_tertiary_events.sql', 1,1);
+insert #directorytree (subdirectory, depth, isfile) values('SIAL_bqa_incomplete\MOE_ITL_events.sql', 1,1);*/
+insert #directorytree (subdirectory, depth, isfile) exec master.sys.xp_dirtree @sourceFolder, 1, 1;
+
 
 /* Create a temp table to hold the result log of running the scripts  */
 if object_id('tempdb..#resultsummary') is not null drop table #resultsummary;
@@ -109,6 +114,8 @@ while @@FETCH_STATUS = 0
 	/* Replace the schema identifier in the script with the target schema into which the SIAL components need to be created */ 
 	set @fileContent = convert(varchar(max), @varbinaryField);
 	set @fileContent = replace(@fileContent, '{schemaname}', @targetschemaname);
+	set @fileContent = replace(@fileContent, 'IDI_Clean', @sourcedbname);
+
 
 	/* Execute the text of the file as SQL, and capture the log*/
 	begin try

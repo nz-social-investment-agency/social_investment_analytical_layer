@@ -3138,7 +3138,7 @@ run;
 
   DATA SIDI_temp2 ;
     IF STRIP("&SIDIsandpit.") = "Y" THEN CALL SYMPUTX("DatabaseCall", "IDI_sandpit") ;
-    ELSE CALL SYMPUTX("DatabaseCall", "IDI_clean&SIDId_IDIextDt.")  ;
+    ELSE CALL SYMPUTX("DatabaseCall", "&SIDId_IDIextDt.")  ;
   run ;
 
   %PUT Database called: &DatabaseCall &SIDIsandpit.;
@@ -8711,7 +8711,7 @@ run;
 
   DATA SIDI_temp2 ;
     IF STRIP("&SIDIsandpit.") = "Y" THEN CALL SYMPUTX("DatabaseCall", "IDI_sandpit") ;
-    ELSE CALL SYMPUTX("DatabaseCall", "IDI_clean&SIDId_IDIextDt.")  ;
+    ELSE CALL SYMPUTX("DatabaseCall", "&SIDId_IDIextDt.")  ;
   run ;
 
   %PUT Database called: &DatabaseCall &SIDIsandpit.;

@@ -26,18 +26,18 @@ HISTORY:
 
 *********************************************************************************************************/
 
+/* Define source database version*/
+%let dbrefreshversion = &idi_refresh; /* Should be the source DB name, like IDI_Clean or IDI_Clean_20161020*/
 
 /* Include Marc DeBoer's macros to create benefit spells from the msd_clean.msd_spell table*/ 
-
-
 /* Call the macros to create the benefit spells data*/ 
 %AdltsMainBenSpl(AMBSinfile =
-                 ,AMBS_IDIxt = 
+                 ,AMBS_IDIxt = &dbrefreshversion.
                  ,AMBS_BenSpl = benefitspells);
 
 /* Get the MSD tier 1 benefits per individual per benefit type */
 proc sql noprint;
-	connect to odbc(dsn=idi_clean_archive_srvprd);
+	connect to odbc(dsn=idi_sandpit_srvprd);
 	create table work.msd_first_tier as
 		select  snz_uid,
 			snz_swn_nbr,
@@ -52,7 +52,7 @@ proc sql noprint;
 				[snz_uid],[snz_swn_nbr],[msd_fte_servf_code],[msd_fte_srvst_code],
 				[msd_fte_start_date],[msd_fte_end_date],[msd_fte_daily_gross_amt],
 				[msd_fte_daily_nett_amt]
-			from [msd_clean].[msd_first_tier_expenditure]);
+			from &dbrefreshversion..[msd_clean].[msd_first_tier_expenditure]);
 	disconnect from odbc;
 quit;
 

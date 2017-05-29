@@ -31,7 +31,7 @@
 
 
 
-create view SIAL_MIX_selfharm_events as (
+create view {schemaname}.SIAL_MIX_selfharm_events as (
 select  snz_uid, 
 			'MIX' as department,
 			'HRM' as datamart,

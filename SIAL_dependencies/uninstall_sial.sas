@@ -33,8 +33,8 @@ HISTORY:
 16 March 2017  v1
 *********************************************************************************************************/
 
-%let targetschema=<schemaname>; /*Example: DL-MAA2016-XX*/
-%let sial_code_path = <path_to_sial>\social_investment_analytical_layer; /*Example: \\wprdfs0x\MAA2016-XX BLAH Project\myfolder\social_investment_analytical_layer */
+%let targetschema=DL-MA20XX-XX;
+%let sial_code_path = \\wprdfs08\<project_name>\social_investment_analytical_layer;
 
 /*******************************************************************************************************************************
 START OF SCRIPT
@@ -55,6 +55,7 @@ data _null_;
 	sialuninst = tranwrd(sialuninst, "{schemaname}" , &targetschema.);
 	call symputx('sialuninst', sialuninst);
 run;
+
 proc sql;
 	connect to odbc(dsn=idi_sandpit_srvprd);
 	

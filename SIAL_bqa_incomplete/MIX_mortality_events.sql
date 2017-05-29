@@ -4,7 +4,7 @@ TITLE: MIX_mortality_events
 DESCRIPTION: Standardised SIAL events table for the MOH and DIA based mortality dataset
 
 INPUT: 
-[IDI_Clean].[moh_clean].[mortality]
+[IDI_Clean].[moh_clean].[mortality_registrations]
 [IDI_Clean].[dia_clean].[deaths]
 
 OUTPUT: 
@@ -23,6 +23,7 @@ CREATED:
 04 Oct 2016
 
 HISTORY: 
+18 May 2017 EW rewrote to handle new MOH tables
 *********************************************************************************************************/
 
 	create view {schemaname}.SIAL_MIX_mortality_events as (
@@ -45,7 +46,7 @@ HISTORY:
 	moh_mor_icd_d_code as event_type,
 	moh_mor_death_year_nbr-moh_mor_birth_year_nbr as event_type_2,
 	'MOH' as event_type_3
-	from [IDI_Clean].[moh_clean].[mortality]
+	from [IDI_Clean].[moh_clean].[mortality_registrations]
 	union all
 	select [snz_uid],
 	'MIX' as department,
@@ -57,7 +58,7 @@ HISTORY:
 		cast(dia_dth_death_month_nbr as varchar(2))+'-01' as datetime) as [end_date],
 	null as event_type, null as event_type_2, 'DIA' as event_type_3
 	from [IDI_Clean].[dia_clean].[deaths]
-	where [dia_dth_death_year_nbr] > ( select max(moh_mor_death_year_nbr) from [IDI_Clean].[moh_clean].[mortality])
+	where [dia_dth_death_year_nbr] > ( select max(moh_mor_death_year_nbr) from [IDI_Clean].[moh_clean].[mortality_registrations])
 	)x
 	) ;
 

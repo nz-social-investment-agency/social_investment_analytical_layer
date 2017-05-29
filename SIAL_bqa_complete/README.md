@@ -1,6 +1,6 @@
 ## Readme file for folder: SIAL_bqa_complete
 
-All scripts in this folder have been reviewed by the corresponding agency.
+All scripts in this folder have been reviewed by the corresponding agencey.
 
 Where possible the scripts are written in SQL and create views to conserve space. 
 Users should take care using tables during a refresh persiod as views will use the latest data.
@@ -19,4 +19,4 @@ granted premission to share it for use in these tables.
 
 For any questions please contact info@siu.govt.nz.
 
-Last updated: Jan 2017.
+Last updated: May 2017.

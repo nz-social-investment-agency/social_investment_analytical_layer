@@ -22,7 +22,9 @@ CREATED: 22 July 2016
 BUSINESS QA COMPLETE: September 2016
 
 HISTORY: 
-20 DEC K Maxwell - using only data from IDI clean. Previous version used sandpit data (as all data was not 
+
+26 May 2017 V Benny	Changed the subject area to use cyf_cec_business_area_type_code
+20 DEC 2016	K Maxwell - using only data from IDI clean. Previous version used sandpit data (as all data was not 
                    available in IDI clean) and all sandpit records did not have unique ID's. Table now 
 				   much more simple and clean.
 *********************************************************************************************************/
@@ -32,7 +34,7 @@ create view {schemaname}.SIAL_CYF_client_events as
 	(select id.snz_uid as snz_uid,
 			'MSD' as department,
 			'CYF' as datamart,
-			'CLI' as subject_area, 
+			cyf_cec_business_area_type_code as subject_area, 
 			cast(cec.cyf_cec_event_start_date as datetime) as [start_date], 
 			cast(cec.cyf_cec_event_end_date as datetime) as [end_date], 
 			sum(cec.cyf_cec_direct_gross_amt) as cost, 
