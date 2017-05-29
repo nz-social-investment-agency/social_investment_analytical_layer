@@ -18,6 +18,19 @@ For example, a hospitalisation spell for an individual in SIAL event terms will 
 **SIAL_log:** This folder is used to store the output logs that SAS generates. Since SAS does not have easy to use error handling the logs are written to file and scanned for errors.  
 **SIAL_docs:** This folder contains the data dictionary for the SIAL and an overview of the datasets timeline.
 
+## Pre-requisites
+Running the SIAL requires read privileges for the following schemas in the IDI_Clean (for any archive version)-
+* moh_clean
+* moe_clean
+* msd_clean
+* acc_clean
+* cyf_clean
+* cor_clean
+* moj_clean
+* pol_clean
+
+If you do not have access to any of the above schemas, then the SIAL installation will skip the creation of the tables/views pertaining to that schema alone. It will still create the components that for the schemas that you have access to. At the end of installation, the tool gives you a detailed breakdown of which components were successfully created, and which ones failed. It also gives you the reason for failure. For example, if you do not have access to "moj_clean" but have access to all other schemas above, the installation will not create the SIAL_MOJ_courtcase_events view, but will still create all the other SIAL components in your target schema. This failure will be listed in the output from the installation. To get access to the schemas listed above, please contact Statistics New Zealand.
+
 ## Installation:
 1. Download the zip file containing the SIAL scripts from github.
 2. Email the zipped file to access2microdata@stats.govt.nz and ask them to move it into your project folder.
