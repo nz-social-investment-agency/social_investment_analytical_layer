@@ -5,7 +5,7 @@ New version, dated 29 May 2017. Refer to CHANGELOG.md for summary of changes.
 
 ## Overview:
 
-The SIU has create a Social Investment Analytical Layer (SIAL): events-structured tables that arrange a version of the data held in Statistics New Zealand's IDI into a consistent format, making it easier and faster for authorised IDI users (researchers and analysts) to use and understand.
+The SIU has created a Social Investment Analytical Layer (SIAL): events-structured tables that arrange a version of the data held in Statistics New Zealand's IDI into a consistent format, making it easier and faster for authorised IDI users (researchers and analysts) to use and understand.
 
 The SIAL is designed to be reusable for the purposes of easy creation of variables for analysis and costing. It reformats the commonly used social sector tables available in the IDI into tables based on events (events-structured). An event is defined by a start date and an end date during which the individual was engaged in a particular interaction as recorded by an agency (governmental or NGO). the event can be described as being a particular type, and the SIAL also attempts to attach a cost for this event. When such costs are not available directly from the IDI, the SIAL augments the IDI data with costing information obtained from specific agencies. For most of the commonly used tables available in the IDI, there is a corresponding events-structured table under the SIAL.
 
