@@ -43,7 +43,7 @@ select  distinct
 FROM [IDI_Clean].[cor_clean].[ov_major_mgmt_periods] a
 inner join IDI_Metadata.clean_read_CLASSIFICATIONS.cor_ov_mmc_dim codes on (a.[cor_mmp_mmc_code]=codes.Code)
 left join [IDI_Sandpit].{schemaname}.[cor_mmc_pricing] b
-on a.cor_mmp_mmc_code = b.mmc_code and a.start_date between b.start_date and b.end_date
+on a.cor_mmp_mmc_code = b.mmc_code and a.[cor_mmp_period_start_date] between b.start_date and b.end_date
 where [cor_mmp_mmc_code] IN ('PRISON','REMAND','HD_SENT','HD_REL','ESO','PAROLE','ROC','PDC',
 'PERIODIC','COM_DET','CW', 'COM_PROG','COM_SERV','OTH_COM','INT_SUPER','SUPER')
 ;
