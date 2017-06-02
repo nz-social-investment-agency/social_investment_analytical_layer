@@ -22,7 +22,7 @@ Analysis Unit:
 Training activity of individuals in programmes administered by Industry Training Organisation in each training fund in a calendar year. 
 
 Cost is selected to be fixed at 2000 for a full course as an estimate based in the year ending 2015, until  actual cost per course from MOE
-
+MoE uses fixed cost for each course - awaiting fixed cost from MoE, till then use fixed figure of 2000
 Each row is per course for each snz_uid
 
 Note that from 2011 onwards there is a change of management system
