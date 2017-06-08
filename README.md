@@ -1,4 +1,4 @@
-# social_investment_analytical_layer v1.1.0
+# Social Investment Analytical Layer
 [![GitHub version](https://badge.fury.io/gh/nz-social-investment-unit%2Fsocial_investment_analytical_layer.svg)](https://badge.fury.io/gh/nz-social-investment-unit%2Fsocial_investment_analytical_layer)
 
 Standardised tables for doing cross agency work in the IDI.
