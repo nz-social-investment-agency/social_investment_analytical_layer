@@ -25,6 +25,7 @@ AUTHOR: Wen Jhe Lee
 DATE: 28 April 2017
 
 HISTORY: 
+15 Jun 2017	WL	Changed to left join as was excluding In Registr applications
 18 May 2017	CM	Minor formatting changes
 18 May 2017	VB	Formatting changes, view name change
 28 Apr 2017	WL	v1	
@@ -82,7 +83,7 @@ create view {schemaname}.SIAL_HNZ_register_events as (
 		on		
 			coalesce(newapp.snz_application_uid, -1)  = coalesce(newapp_hh.snz_application_uid, -1)
 			and coalesce(newapp.snz_legacy_application_uid, -1)  = coalesce(newapp_hh.snz_legacy_application_uid, -1)
-		inner join		
+		left join		
 			[IDI_Clean].[hnz_clean].[register_exit] reg	
 		on		
 			coalesce(newapp_hh.snz_application_uid, -1)  = coalesce(reg.snz_application_uid, -1)
@@ -115,7 +116,7 @@ create view {schemaname}.SIAL_HNZ_register_events as (
 		on		
 			coalesce(tfapp.snz_application_uid, -1)  = coalesce(tfapp_hh.snz_application_uid, -1)
 			and coalesce(tfapp.snz_legacy_application_uid, -1)  = coalesce(tfapp_hh.snz_legacy_application_uid, -1)
-		inner join		
+		left join		
 			[IDI_Clean].[hnz_clean].[register_exit] reg	
 		on		
 			coalesce(tfapp_hh.snz_application_uid, -1)  = coalesce(reg.snz_application_uid, -1)
