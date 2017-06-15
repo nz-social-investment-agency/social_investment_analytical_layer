@@ -340,7 +340,7 @@ proc sql;
 	select 
 		snz_uid
 		,'MOE' as department
-		,'MOE' as datamart
+		,'STU' as datamart
 		,'ENR' as subject_area
 		,start_date format=ddmmyy10.
 		,end_date format=ddmmyy10.
