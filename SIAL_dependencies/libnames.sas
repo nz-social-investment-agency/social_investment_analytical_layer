@@ -20,13 +20,6 @@ libname msd ODBC dsn=idi_clean_archive_srvprd schema=msd_clean;
 /*SLA*/
 libname sla ODBC dsn=idi_clean_archive_srvprd schema=sla_clean;
 
-libname moe ODBC dsn=idi_clean_archive_srvprd schema=moe_clean;
-
-libname moe ODBC dsn=idi_clean_archive_srvprd schema=moe_clean;
-
-
-libname moe ODBC dsn=idi_clean_archive_srvprd schema=moe_clean;
-
 /*COR*/
 libname cor ODBC dsn=idi_clean_archive_srvprd schema=cor_clean;
 
