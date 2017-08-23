@@ -20,6 +20,7 @@ AUTHOR: V Benny
 DATE: 22 July 2016
 
 HISTORY: 
+v1	16 Jun 2017	WJ	Adding for primhd team type code
 
 *********************************************************************************************************/
 
@@ -35,7 +36,8 @@ create view {schemaname}.SIAL_MOH_primhd_events as (
 		else price.activity_price*moh_mhd_activity_unit_count_nbr end as cost,
 		moh_mhd_activity_setting_code as event_type,
 		moh_mhd_activity_type_code as event_type_2,
-		moh_mhd_activity_unit_type_text as event_type_3
+		moh_mhd_activity_unit_type_text as event_type_3,
+		moh_mhd_team_type_code as event_type_4
 	from IDI_Clean.moh_clean.PRIMHD primhd
 	left join [IDI_Sandpit].{schemaname}.moh_primhd_pu_pricing price
 		on (primhd.moh_mhd_activity_setting_code = price.activity_setting_code 

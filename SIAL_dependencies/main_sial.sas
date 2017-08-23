@@ -115,8 +115,9 @@ libname sand ODBC dsn= idi_sandpit_srvprd schema="&targetschema." bulkload=yes;
 %include "&dependfolder.\libnames.sas";
 
 /* Load macros */
-%include "&dependfolder.macro_geterrors.sas";
-%include "&dependfolder.macro_AdultSpellsonYouthWorkingAgeBenefits.sas";
+options obs=MAX mvarsize=max pagesize=132 
+        append=(sasautos=("&dependfolder.sasautos"));
+
 
 /* Read in the SQL scripts to be executed*/
 filename file0 %tslit(&dependfolder.uninstall_sial_tables_views.sql);

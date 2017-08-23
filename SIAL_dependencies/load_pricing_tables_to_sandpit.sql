@@ -19,7 +19,7 @@
  [IDI_Sandpit].[@schema].moj_offence_to_category_map
  [IDI_Sandpit].[@schema].moj_offense_cat_pricing
  [IDI_Sandpit].[@schema].cor_mmc_pricing
-
+ [IDI_Sandpit].[@schema].moe_itl_fund_rate
 
  DEPENDENCIES: 
  
@@ -31,6 +31,8 @@
  20 Jan 2017
 
  HISTORY:
+ 24 Aug 2017	EW	Tidy up of itl
+ 14 Jun 2017	WJ	Added industry training fund values - code for table moe_itl_fund_rate
  24 May 2017	VB	Added inflation_index table, error handling.
  16 Mar 2017	VB	Converted into a stored proc and added extra tables
  20 Jan 2017	EW	v1
@@ -54,6 +56,7 @@ begin
 	declare @filepath_moj_off varchar(250);
 	declare @filepath_moj_off_pri varchar(250);
 	declare @filepath_cor_mmc_pri varchar(250);
+	declare @filepath_moe_itl_fund varchar(250);
 	declare @errorstat int = 0; 
 	declare @errormessage nvarchar(max); 
 
@@ -69,6 +72,7 @@ begin
 	set @filepath_moj_off= @sourceFolder + 'moj_offence_to_category_map.csv';
 	set @filepath_moj_off_pri = @sourceFolder + 'moj_offense_cat_pricing.csv';
 	set @filepath_cor_mmc_pri = @sourceFolder + 'cor_mmc_pricing.csv';
+	set @filepath_moe_itl_fund = @sourceFolder + 'moe_itl_fund.csv';
 
 	/*******************************************************
 	Create an error capture table
@@ -572,6 +576,62 @@ begin
 	else 
 		begin
 			set @outputquery = 'insert into ' + @targetschemaname + '.sialexecresults values(current_timestamp, ''cor_mmc_pricing.csv'', ''Execution failed'', '''+ @errormessage + ''')';
+				execute(@outputquery);		
+			set @errorstat = 0;
+		end
+
+
+	/******************************************/
+	/* MOE ITL Fund           */
+	/******************************************/
+
+	declare @query_moe_itl_fund nvarchar(2000);
+	set @query_moe_itl_fund='
+
+	use IDI_Sandpit;
+
+	/* create a shell for the data to go into */
+	create table '+@schema+'.moe_itl_fund_rate
+	([moe_itl_fund_code] varchar(9),
+	 [cal_year] float,
+	 [rate] float,
+	 [start_date] datetime,
+	 [end_date] datetime,
+	 );
+
+
+	/* pull all the data from the csv into the table */
+	/* make sure the dates get read in the right way round */
+	set dateformat dmy 
+
+
+	bulk insert ' +@schema+'.moe_itl_fund_rate
+	from ''' +  @filepath_moe_itl_fund + '''
+	 with(
+	datafiletype = ''char'',
+	fieldterminator = '','',
+	rowterminator = ''\n'',
+	firstrow = 2)
+	';
+
+	/* check everything has been escaped properly */
+	/*print @query_moe_itl_fund*/
+	begin try
+		exec sp_ExecuteSQL @query_moe_itl_fund;
+	end try
+	begin catch
+		set @errorstat = 1
+		select @errormessage = 'Error: ' + cast(ERROR_NUMBER() as varchar(10)) +': ' + ERROR_MESSAGE()
+	end catch
+	/* Write the log into the results table */
+	if (@errorstat=0)
+		begin
+			set @outputquery = 'insert into ' + @targetschemaname + '.sialexecresults values(current_timestamp, ''moe_itl_fund.csv'', ''Execution succeeded'', ''No errors'')';
+			execute(@outputquery);
+		end
+	else 
+		begin
+			set @outputquery = 'insert into ' + @targetschemaname + '.sialexecresults values(current_timestamp, ''moe_itl_fund.csv'', ''Execution failed'', '''+ @errormessage + ''')';
 				execute(@outputquery);		
 			set @errorstat = 0;
 		end

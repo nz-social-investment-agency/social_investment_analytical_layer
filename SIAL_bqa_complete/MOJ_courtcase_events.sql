@@ -25,7 +25,9 @@ BUSINESS QA COMPLETE: OCTOBER 2016
 
 HISTORY: 
 
-19 Oct 2016 - Incorporated the changes suggested during business QA to derive costs in a more accurate way
+02 Aug 2017 - Changed the join between charges table and moj_court_id table to account for column name 
+				change for court_id column in the IDI Refresh dated 28 July 2017.
+19 Oct 2016 - Incorporated the changes suggested during business QA to derive costs in a more accurate way.
 
 *********************************************************************************************************/
 
@@ -66,7 +68,7 @@ from (
 				end as outcome_type,
 				offcatmap.offence_category
 			from IDI_Clean.[moj_clean].[charges] c
-			inner join [IDI_Metadata].[clean_read_CLASSIFICATIONS].[moj_court_id] court1 on (c.[moj_chg_last_court_id_code] = court1.Code)
+			inner join [IDI_Metadata].[clean_read_CLASSIFICATIONS].[moj_court_id] court1 on (c.[moj_chg_last_court_id_code] = court1.court_id)
 			left join IDI_Sandpit.{schemaname}.[moj_offence_to_category_map] offcatmap on (c.moj_chg_offence_code = offcatmap.offence_code)
 		) unordered_charges
 	)ordered_charges 

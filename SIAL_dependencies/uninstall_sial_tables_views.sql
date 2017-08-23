@@ -17,6 +17,7 @@
  CREATED: 10 Mar 2017
 
  HISTORY: 
+ 24 Aug 2017 EW Added drop for itl fund
  24 May 2017 VB Made the drop table/view script 
 				automatically search for SIAL components.
  10 Mar 2017 VB First version
@@ -36,6 +37,7 @@ if object_id('{schemaname}.sialexecresults') is not null  drop table {schemaname
 
 
 /* Drop the pricing support tables*/
+if object_id('{schemaname}.moe_itl_fund_rate') is not null  drop table {schemaname}.moe_itl_fund_rate;
 if object_id('{schemaname}.inflation_index') is not null  drop table {schemaname}.inflation_index;
 if object_id('{schemaname}.moe_school_decile_pricing') is not null  drop table {schemaname}.moe_school_decile_pricing;
 if object_id('{schemaname}.moe_ter_fundingrates') is not null  drop table {schemaname}.moe_ter_fundingrates;
