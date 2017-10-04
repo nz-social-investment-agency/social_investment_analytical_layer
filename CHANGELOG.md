@@ -21,3 +21,7 @@ v1
 * Changing the MSD T1 cost table to a table about entitlements. This table no longer includes costs. Actual benefits paid can be obtained from the IRD table
 * Tidy up of the long MSD T1 script. Formats and macros have been separated out
 
+## [X.X.X]
+* Moved corrections table to the business qa complete folder (was completed in May)
+* Tidied up error in the datasets timeline document
+

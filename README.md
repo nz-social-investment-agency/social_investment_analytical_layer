@@ -30,6 +30,7 @@ Running the SIAL requires read privileges for the following schemas in the IDI_C
 * cor_clean
 * moj_clean
 * pol_clean
+* hnz_clean
 
 If you do not have access to any of the above schemas, then the SIAL installation will skip the creation of the tables/views pertaining to that schema alone. It will still create the components that for the schemas that you have access to. At the end of installation, the tool gives you a detailed breakdown of which components were successfully created, and which ones failed. It also gives you the reason for failure. For example, if you do not have access to "moj_clean" but have access to all other schemas above, the installation will not create the SIAL_MOJ_courtcase_events view, but will still create all the other SIAL components in your target schema. This failure will be listed in the output from the installation. To get access to the schemas listed above, please contact Statistics New Zealand.
 
@@ -117,7 +118,7 @@ SIAL Supporting tables(can be found in SQL Management Studio under IDI_Sandpit -
 2. If the SIAL is to be run pointing to the IDI_Clean_20160715 refresh version, please note that you will have failures for 'MOH_nnpac_events.sql', 'MIX_mortality_events.sql' and 'CYF_client_events.sql'. The underlying IDI tables have changed the strucuture since this refresh, and the latest SIAL tables have also changed to reflect these underlying table-level changes. To circumvent these errors, use an older version of these scripts from Github or make the required changes to these 3 scripts manually by renaming the appropriate columns to reflect what is available in this IDI refresh version. For more guidance/help, contact us at info@siu.govt.nz.
 
 ## Getting Help:
-For more help/guidance in running the SIAL, email info@siu.govt.nz
+For more help/guidance in running the SIAL, email info@sia.govt.nz
 
 Tracking number: SIU-2017-0139
 
