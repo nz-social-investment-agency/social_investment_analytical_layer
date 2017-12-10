@@ -20,7 +20,8 @@ CREATED: 22 July 2016
 BUSINESS QA COMPLETE: OCTOBER 2016
 
 HISTORY: 
-14 September 2016 V Benny Changed the daily costs into a lumpsum cost. This is done by 
+30 Nov 2017 EW removed working for families as that is now captured in the IRD table
+14 Sep 2016 VB Changed the daily costs into a lumpsum cost. This is done by 
                           lumpsum_cost = dailycost* (end_date-start_date + 1)
 
 *********************************************************************************************************/
@@ -48,6 +49,7 @@ create view {schemaname}.SIAL_MSD_T2_events as
 			[msd_ste_end_date],
 			sum([msd_ste_daily_gross_amt]) as [msd_ste_daily_gross_amt]
 		from IDI_Clean.[msd_clean].[msd_second_tier_expenditure]
+		where msd_ste_supp_serv_code != '064'
 		group by [snz_uid], 
 			[msd_ste_supp_serv_code], 
 			[msd_ste_srvst_code],
