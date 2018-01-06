@@ -13,6 +13,22 @@ The SIAL is designed to be reusable tool for the purposes of easy creation of va
 
 For example, a hospitalisation spell for an individual in SIAL event terms will have the snz_uid, start and end dates of the hospitalisation, the type of event described by the purchase unit code, the cost of that event and the agency and sub-agency information that the individual interacted with. Another example would be a school enrollment, again defined by a start and end date of enrollment, along with the cost of enrollment. If costs are available from the IDI tables, these are directly used. In the above examples, the costs are not readily available in the IDI, but the SIAL has additional cost-related info obtained from the respective govt. agencies that enables putting a price to each of those events. Wherever the costs cannot be quantified, the cost columns are left NULL, or are completely absent. Also, events of an instantaneous nature (for example- purchasing a pharmaceutical drug) will have the same start and end dates.
 
+## License for the Social Investment Analytical Layer Content
+[![License: CC BY SA 4.0](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
+
+Crown copyright ©. This copyright work is licensed under the Creative Commons Attribution 4.0 International licence. In essence, you are free to copy, distribute and adapt the work, as long as you attribute the work to the New Zealand Government and abide by the other licence terms. 
+
+To view a copy of this licence, visit [https://creativecommons.org/licenses/by-sa/4.0/](https://creativecommons.org/licenses/by-sa/4.0/). 
+
+Please note that neither the New Zealand Government emblem nor the New Zealand Government logo may be used in any way which infringes any provision of the [Flags, Emblems, and Names Protection Act 1981](http://www.legislation.govt.nz/act/public/1981/0047/latest/whole.html) or would infringe such provision if the relevant use occurred within New Zealand. Attribution to the New Zealand Government should be in written form and not by reproduction of any emblem or the New Zealand Government logo.
+
+## License the Social Investment Analytical Layer Code Base
+GNU GPLv3 License
+
+Crown copyright (c) 2017, Social Investment Agency on behalf of the New Zealand Government.
+
+See ![LICENSE.md](https://github.com/nz-social-investment-agency/social_investment_analytical_layer/blob/master/LICENSE) for more details.
+
 ## Folder Descriptions:
 **SIAL_dependencies:** this folder contains the main_sial.sas script that builds all tables/views. It also contains cost data that isn't available in the IDI along with code to load these files in to SQL.  
 **SIAL_bqa_complete:** this folder contains scripts that have been reviewed by the corresponding agencies.  
