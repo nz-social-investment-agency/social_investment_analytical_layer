@@ -13,6 +13,8 @@ The SIAL is designed to be reusable tool for the purposes of easy creation of va
 
 For example, a hospitalisation spell for an individual in SIAL event terms will have the snz_uid, start and end dates of the hospitalisation, the type of event described by the purchase unit code, the cost of that event and the agency and sub-agency information that the individual interacted with. Another example would be a school enrollment, again defined by a start and end date of enrollment, along with the cost of enrollment. If costs are available from the IDI tables, these are directly used. In the above examples, the costs are not readily available in the IDI, but the SIAL has additional cost-related info obtained from the respective govt. agencies that enables putting a price to each of those events. Wherever the costs cannot be quantified, the cost columns are left NULL, or are completely absent. Also, events of an instantaneous nature (for example- purchasing a pharmaceutical drug) will have the same start and end dates.
 
+Please note that not all of the SIAL table code has been reviewed by the respective agencies. The code that has already been reviewed can be found in the SIAL_bqa_complete folder (the folder structure is described further down this readme).
+
 ## License for the Social Investment Analytical Layer Content
 [![License: CC BY SA 4.0](https://i.creativecommons.org/l/by-sa/4.0/88x31.png)](https://creativecommons.org/licenses/by-sa/4.0/)
 
