@@ -17,6 +17,6 @@ is does not identify any person. The data relates to cost look ups. These have e
 from an agency, or freely online (treasury vote information). Where sourced from an agency the SIU has been
 granted premission to share it for use in these tables.
 
-For any questions please contact info@siu.govt.nz.
+For any questions please contact info@sia.govt.nz.
 
 Last updated: May 2017.

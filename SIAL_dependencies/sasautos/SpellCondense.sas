@@ -32,6 +32,7 @@
      Marc de Boer   Jul2015   Removed delete of [SCoutfile] dataset as it is not required
      Marc de Boer   Aug2015   In cases were there are still overlapping spells that cannot be resolved then include
                               them in the final output so the output file has all the spells included in the infile.
+	Mar 2019  Pete Holmes		Changes for SAS-GRID environment - macro names need to be all lower case for some reason
 
 */
 
@@ -71,7 +72,7 @@ Inputs
         *** Condense macro ***;
         ***                ***;
 
- %MACRO SpellCondense( SCinfile
+ %MACRO spellcondense( SCinfile
                      ,SCoutfile
                      ,SClink
                      ,SCstart

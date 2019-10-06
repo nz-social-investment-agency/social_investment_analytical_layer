@@ -1,4 +1,4 @@
-/*  
+﻿/*  
     TITLE:  Spell Combine Macro
 
     PURPOSE: Macro combines two spell histories into one
@@ -16,6 +16,7 @@
      Marc de Boer   May2015   Allowed CSidvar to be both numeric and character
      Marc de Boer   May2015   Allowed spell sd and ed to be either datetime or date
      Marc de Boer   Jul2015   Allowed spell sd and ed to be time as well
+	 Mar 2019  Pete Holmes		Changes for SAS-GRID environment - macro names need to be all lower case for some reason
 */
 
 ********************************************************************************************************;
@@ -70,7 +71,7 @@ Outputs:
         *** Combine Spells macro ***;
         ***                      ***;
 
- %MACRO CombineSpell( CSinfile1 
+ %MACRO combinespell( CSinfile1 
                      ,CSSpell1_Vars
                      ,CSSpell1_SD
                      ,CSSpell1_ED
@@ -84,16 +85,23 @@ Outputs:
 
 /*
 
- %LET CSinfile1 = SCtest1 ;
- %LET CSSpell1_Vars = EA_assist ;
- %LET CSSpell1_SD = participation_sd ;
- %LET CSSpell1_ED = participation_ed ;
- %LET CSinfile2 = SCtest2 ;
- %LET CSSpell2_Vars = Benefit ;
- %LET CSSpell2_SD = SpellFrom ;
- %LET CSSpell2_ED = SpellTo ;
- %LET CSoutfile = SCtest3;
- %LET CSidvar = swn ;
+ %LET CSinfile1 = MSD_MainBen2 ;
+ %LET CSSpell1_Vars = snz_uid
+                                
+                                msd_spel_spell_nbr
+                                BenefitType
+                                BenefitName
+								msd_spel_servf_code 
+								msd_spel_add_servf_code ;
+ %LET CSSpell1_SD = EntitlementSD ;
+ %LET CSSpell1_ED = EntitlementED ;
+ %LET CSinfile2 = MSD_PartnerBen2 ;
+ %LET CSSpell2_Vars = partner_snz_uid
+                              partner_snz_swn_nbr ;
+ %LET CSSpell2_SD = PartnerSD ;
+ %LET CSSpell2_ED = PartnerED ;
+ %LET CSoutfile = MSD_MainBen3;
+ %LET CSidvar = snz_swn_nbr ;
 */
 
  
@@ -502,6 +510,8 @@ Outputs:
   CondStats1 = "<Blank Spell>" ;
  run ;
 
+
+ 
  ** Combine all spells into a single file **;
  DATA &CSoutfile (KEEP = CSidvar 
                          CSspellSD 
@@ -543,6 +553,7 @@ Outputs:
   %MACRO UnpackVars ;
    %DO c = 1 %TO 2 ;
    %DO i = 1 %TO &&CS&c._VarN ;
+   
       LENGTH &&CS&c._Var&i &&CS&c._Len&i ;
       FORMAT &&CS&c._Var&i &&CS&c._Fmt&i ;
       LENGTH temp4 $1000. ;

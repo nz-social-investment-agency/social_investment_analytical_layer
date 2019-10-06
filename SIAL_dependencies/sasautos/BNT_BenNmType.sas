@@ -18,6 +18,7 @@
      Aug2014    Marc de Boer  Included output of the official benefit name at the observation date.
      Oct2015    Marc de Boer  For benefit serv and additional_benefit data that is post welfare reform but applies to a 
                               pre-July 2013 date, then impute the pre-welfare reform benefit code (eg "675MED1", "675MED2" = "600").
+	Mar 2019  Pete Holmes		Changes for SAS-GRID environment - macro names need to be all lower case for some reason
 */
 
 /*
@@ -46,7 +47,7 @@
 ********************************************************************************************************;
           ** Macro code **;
 
-  %MACRO BNT_BenNmType( BNTserv = 
+  %MACRO bnt_bennmtype( BNTserv = 
                      ,BNTasd = 
                      ,BNTdate = 
                      ,BNT_BenNm = 

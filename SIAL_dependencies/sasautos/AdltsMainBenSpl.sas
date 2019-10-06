@@ -1,4 +1,4 @@
-/*
+﻿/*
      TITLE: Creates spells of adults on main (Youth and Working age) benefits.
 
      PURPOSE: BDD benefit spells split between main and single on the benefit spells
@@ -10,8 +10,15 @@
      AUTHOUR: Marc de Boer, MSD
      DATE: Janurary 2014 
 
-     CHANGE HISTROY
+     CHANGE HISTORY
      WHEN       WHO           WHY
+	01 Apr 2018	BV		Added a new parameter called bigdate, which ensures that end dates
+						for spells that have not ended yet will be replaced with a reasonably 
+						large date based on user choice instead of defaulting to IDI refresh date.
+						Before this update, the large date was based off the database name- but this
+						caused issues when the code was run on the latest IDI_Clean version (which does
+						not have a date extension in the database name).
+	Mar 2019  Pete Holmes		Changes for SAS-GRID environment - macro names need to be all lower case for some reason
 */
 
 /*
@@ -50,10 +57,11 @@
           ** Macro code **;
 
 
- %MACRO AdltsMainBenSpl( AMBSinfile = 
+ %MACRO adltsmainbenspl( AMBSinfile = 
                         ,AMBS_IDIxt = 
                         ,AMBS_BenSpl =
-                        ) ;
+                        ,bigdate = 99991231
+						) ;
 /*
  %LET AMBSinfile = PM_PC_matched2 ;
  %LET AMBS_IDIxt = 20160224 ;
@@ -102,12 +110,13 @@
          PartnerED 8. ;
   FORMAT PartnerSD
          PartnerED ddmmyy10. ;
-  PartnerSD=INPUT(COMPRESS(msd_ptnr_ptnr_from_date,"-"),yymmdd10.);
-  PartnerED=INPUT(COMPRESS(msd_ptnr_ptnr_to_date,"-"),yymmdd10.) - 1;
-  IF PartnerED = . THEN PartnerED = INPUT("&AMBS_IDIxt.",yymmdd10.);
+		 /*PNH-March 2019 - SAS-GRID stores dates as SAS dates. No need to convert*/
+  PartnerSD=msd_ptnr_ptnr_from_date;
+  PartnerED=msd_ptnr_ptnr_to_date;
+  IF PartnerED = . THEN PartnerED = input("&bigdate.",yymmdd8.);
   DROP msd_ptnr_ptnr_from_date msd_ptnr_ptnr_to_date ;
  run ; 
-
+ 
  ** Subset MSD BDD main benefit spells table to ids of interest *;
   %IF &InfileYes. gt 0 %THEN %DO ;
      DATA AMBS_AllId  ;
@@ -157,9 +166,10 @@
          EntitlementED 8. ;
   FORMAT EntitlementSD
          EntitlementED ddmmyy10. ;
-  EntitlementSD=INPUT(COMPRESS(msd_spel_spell_start_date,"-"),yymmdd10.);
-  EntitlementED=INPUT(COMPRESS(msd_spel_spell_end_date,"-"),yymmdd10.) - 1;
-  IF EntitlementED = . THEN EntitlementED = INPUT("&AMBS_IDIxt.",yymmdd10.);
+		 /* PNH-March 2019 - SAS-GRID dates are stored as sas dates, no nneed for conversion*/
+  EntitlementSD=msd_spel_spell_start_date;
+  EntitlementED=msd_spel_spell_end_date;;
+  IF EntitlementED = . THEN EntitlementED = INPUT("&bigdate.",yymmdd8.);
 
   %BNT_BenNmType( BNTserv = msd_spel_servf_code 
                ,BNTasd = msd_spel_add_servf_code
@@ -177,7 +187,7 @@
 /* Changed 29-Jun-2017, Vinay Benny- Added the columns 'msd_spel_servf_code' and 'msd_spel_add_servf_code' to the Spell variables*/
  %CombineSpell( CSinfile1 =  MSD_MainBen2
                ,CSSpell1_Vars = snz_uid
-                                snz_swn_nbr
+                                /*snz_swn_nbr*/
                                 msd_spel_spell_nbr
                                 BenefitType
                                 BenefitName

@@ -26,21 +26,22 @@ NOTES:
 
 HISTORY: 
 17 March 2017  v1
+Mar 2019  Pete Holmes		Changes for SAS-GRID environment - macro names need to be all lower case for some reason
 *********************************************************************************************************/
 
 
 
 
-%macro getErrors(logfile=);
+%macro geterrors(logfile=);
 
 data errors(keep=logline) log(keep=logline);
 	infile &logfile. missover;
-	length logline $256 coode $20;
+	length logline $256 code $20;
 	retain code;
 
 	input;
 
-	if index(_infile_, '0D'x) then logline=scan(infile_,1,'0D'x);
+	if index(_infile_, '0D'x) then logline=scan(_infile_,1,'0D'x);
 	else logline=_infile_;
 
 	logline= translate(logline, ' ', '%');

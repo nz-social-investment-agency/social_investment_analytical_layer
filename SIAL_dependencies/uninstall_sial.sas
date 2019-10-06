@@ -33,18 +33,17 @@ HISTORY:
 16 March 2017  v1
 *********************************************************************************************************/
 
-%let targetschema=DL-MA20XX-XX;
-%let sial_code_path = \\wprdfs08\<project_name>\social_investment_analytical_layer;
+
+
 
 /*******************************************************************************************************************************
 START OF SCRIPT
 *******************************************************************************************************************************/
 
 /* Set up the sand library to the target database/schema to which the SIAL physical tables are to be written to*/
-%let targetschema=%tslit([&targetschema.]);
+%let targetschema=%tslit([&schema.]);
 
 /* Set up global variables for all the SIAL subdirectories*/
-%let dependfolder = &sial_code_path.\SIAL_dependencies\;
 
 /* Read in the SQL scripts to be executed*/
 filename file0 %tslit(&dependfolder.uninstall_sial_tables_views.sql);

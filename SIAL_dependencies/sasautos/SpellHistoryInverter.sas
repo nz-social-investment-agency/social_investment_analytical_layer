@@ -15,6 +15,7 @@
      MODIFCATIONS
      BY             WHEN      WHAT
      Marc de Boer   Oct2013   Removed the nonotes options
+Mar 2019  Pete Holmes		Changes for SAS-GRID environment - macro names need to be all lower case for some reason
      
 */
 
@@ -50,7 +51,7 @@
 
    
 
- %MACRO SpellHistoryInverter(  SHIinfile =
+ %MACRO spellhistoryinverter(  SHIinfile =
                              , SHIoutfile = 
                              , SHIlink = 
                              , SHIspellSD = 

@@ -1,4 +1,4 @@
-/*
+﻿/*
      TITLE: Subset an IDI dataset on the SQL server to a SAS dataset
 
      PURPOSE: Using SQL Pass through procedure subset an IDI dataset to
@@ -11,9 +11,11 @@
      MODIFICATIONS
      WHO            WHEN        WHAT
      Marc de Boer   March 2016  Included the ability to extract from the IDI sandpit area
+	pete Holmes		March 2019 	Changes for SAS-GRID environment - macro names need to be all lower case for some reason
+	changed calls to server to use &idi_refresh macro variable
 */
 
- %MACRO Subset_IDIdataset(SIDId_infile =
+ %MACRO subset_ididataset(SIDId_infile =
                          ,SIDId_Id_var =
                          ,SIDId_IDIextDt = 
                          ,SIDId_IDIdataset =
@@ -111,6 +113,7 @@
      run ;
 
      %MACRO Ids ;
+	 %local i;
         %DO i = 1 %TO &int_id_T-1 ;
             &&int_id&i,
         %END ;
@@ -121,15 +124,19 @@
          the &IEDinfile is on the SAS server not the SQL server *;
 
      ** extract ids from IDI tables in sandpit area using pass through *;
-       PROC SQL ;
-        CONNECT TO SQLSERVR (SERVER = SNZ-IDIResearch-PRD-SQL\iLEED
-                             DATABASE = &DatabaseCall.);
+       PROC SQL;
+	   connect to odbc(dsn=&idi_refresh._srvprd);
+	   	/*SAS-GRID changes march 2019*/
+        /*CONNECT TO SQLSERVR (SERVER = SNZ-IDIResearch-PRD-SQL\iLEED
+                             DATABASE = &DatabaseCall.
+							 
+							 );*/
         CREATE TABLE SIDI_temp5 AS
         SELECT a.*
-        FROM CONNECTION TO SQLSERVR (SELECT * FROM &SIDId_IDIdataset.
+        FROM CONNECTION TO odbc (SELECT * FROM &SIDId_IDIdataset.
                                      WHERE  &SIDId_Id_var. IN (%IDS)
                                      ) AS a ;
-        DISCONNECT FROM SQLSERVR ;
+        DISCONNECT FROM odbc ;
        quit ;
 
      PROC APPEND BASE = &SIDIoutfile. DATA = SIDI_temp5 ;
@@ -139,14 +146,16 @@
  ** extract the whole dataset *;
  %IF &SIDISubset. = 0 %THEN %DO ; ** loop 3 *;
    PROC SQL ;
-    CONNECT TO SQLSERVR (SERVER = SNZ-IDIResearch-PRD-SQL\iLEED
+   connect to odbc(dsn=&idi_refresh._srvprd);
+    /*CONNECT TO SQLSERVR (SERVER = SNZ-IDIResearch-PRD-SQL\iLEED
                          DATABASE = &DatabaseCall.
-                         );
+						 );*/
     CREATE TABLE &SIDIoutfile. AS
     SELECT a.*
-    FROM CONNECTION TO SQLSERVR (SELECT * FROM &SIDId_IDIdataset
+    /*FROM CONNECTION TO SQLSERVR (SELECT * FROM &SIDId_IDIdataset*/
+	FROM CONNECTION TO odbc (SELECT * FROM &SIDId_IDIdataset
                                  ) AS a ;
-    DISCONNECT FROM SQLSERVR ;
+    DISCONNECT FROM odbc ;
    quit ;
  %END ; * end loop 3 *;
 
